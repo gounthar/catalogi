@@ -22,8 +22,10 @@ import { Language, languages } from "../core/ports/GetSoftwareExternalData";
 import { createContextFactory } from "./context";
 import { createRouter } from "./router";
 import { getTranslations } from "./translations/getTranslations";
-import { z } from "zod";
+import { createAuthRoutes } from "./authRoutes";
 import { env } from "../env";
+import { createPublicApiRouter } from "./publicApi/routes";
+import { createOpenApiDocument } from "./publicApi/openapi";
 import type { OidcParams } from "../core/usecases/auth/oidcClient";
 
 const makeGetCatalogiJson = (redirectUrl: string | undefined, dbApi: DbApiV2): Handler => {
@@ -41,22 +43,6 @@ const makeGetCatalogiJson = (redirectUrl: string | undefined, dbApi: DbApiV2): H
         const compiledDataPublicJson = JSON.stringify(compiledDataPrivateToPublic(privateCompiledData));
 
         res.setHeader("Content-Type", "application/json").send(Buffer.from(compiledDataPublicJson, "utf8"));
-    };
-};
-
-const makeGetCatalogiJsonV2 = (redirectUrl: string | undefined, dbApi: DbApiV2): Handler => {
-    const getMemoizedPublicList = memoize(() => dbApi.software.getPublicList(), {
-        promise: true,
-        maxAge: 2 * 60 * 60 * 1000 // 2 hours
-    });
-
-    return async (req, res) => {
-        if (redirectUrl !== undefined) {
-            return res.redirect(redirectUrl + req.originalUrl);
-        }
-
-        const data = await getMemoizedPublicList();
-        res.setHeader("Content-Type", "application/json").send(Buffer.from(JSON.stringify(data), "utf8"));
     };
 };
 
@@ -108,7 +94,6 @@ export async function startRpcService(params: {
     });
 
     const catalogiJsonHandler = makeGetCatalogiJson(redirectUrl, dbApi);
-    const catalogiJsonV2Handler = makeGetCatalogiJsonV2(redirectUrl, dbApi);
 
     const app = express();
 
@@ -120,55 +105,9 @@ export async function startRpcService(params: {
     )
         .use(compression() as any)
         .use(cookieParser())
-        .use((req, _res, next) => (console.log("⬅", req.method, req.path, req.body ?? req.query), next()))
+        .use((req, _res, next) => (console.log("⬅", req.method, req.path), next()))
         .use("/public/healthcheck", (...[, res]) => res.sendStatus(200))
-        .get("/auth/login", async (req, res) => {
-            try {
-                const { authUrl } = await useCases.auth.initiateAuth({
-                    redirectUrl: req.query.redirectUrl as string | undefined
-                });
-
-                res.redirect(authUrl);
-            } catch (error: any) {
-                Sentry.captureException(error);
-                console.error("Login error: ", error?.message);
-                console.error(error);
-                res.status(500).json({ error: "Authentication failed" });
-            }
-        })
-        .get("/auth/callback", async (req, res) => {
-            try {
-                const { code, state } = z
-                    .object({
-                        code: z.string(),
-                        state: z.string()
-                    })
-                    .parse(req.query);
-
-                const session = await useCases.auth.handleAuthCallback({
-                    code: code as string,
-                    state: state as string
-                });
-
-                // Cookie should live longer than session to allow refresh token usage
-                const COOKIE_MAX_AGE = 7 * 24 * 60 * 60 * 1000; // 7 days
-
-                res.cookie("sessionId", session.id, {
-                    httpOnly: true,
-                    secure: !isDevEnvironnement,
-                    sameSite: "lax",
-                    maxAge: COOKIE_MAX_AGE
-                });
-
-                const defaultRedirectUrl = `${env.appUrl}/list`;
-                const redirectUrl = session.redirectUrl || defaultRedirectUrl;
-                res.redirect(redirectUrl);
-            } catch (error) {
-                Sentry.captureException(error);
-                console.error("Callback error:", error);
-                res.status(500).json({ error: "Authentication callback failed" });
-            }
-        })
+        .use(createAuthRoutes({ ...useCases.auth, appUrl, isDevEnvironnement }))
         .get("/auth/logout", async (req, res) => {
             try {
                 const sessionId = req.cookies.sessionId;
@@ -206,7 +145,13 @@ export async function startRpcService(params: {
                     .json({ message: `No translations found for language : ${lang}`, error: error.message });
             }
         })
-        .get(`*/v2/catalogi.json`, catalogiJsonV2Handler)
+        .use(
+            createPublicApiRouter({
+                getPublicList: () => dbApi.software.getPublicList(),
+                redirectUrl,
+                getDocument: isDevEnvironnement ? createOpenApiDocument : undefined
+            })
+        )
         .get(`*/catalogi.json`, catalogiJsonHandler)
         // the following is just for backward compatibility
         .get(`*/sill.json`, catalogiJsonHandler)

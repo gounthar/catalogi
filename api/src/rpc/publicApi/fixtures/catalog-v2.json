@@ -1,0 +1,252 @@
+[
+    {
+        "id": 1,
+        "name": "7zip",
+        "description": {
+            "fr": "Compression: Création de .zip, .rar, .tar.gz etc."
+        },
+        "image": "https://logodix.com/logo/1966390.png",
+        "latestVersion": {
+            "version": "26.03",
+            "releaseDate": "2026-09-04T00:00:00.000Z"
+        },
+        "addedTime": "2018-01-01T00:00:00.000Z",
+        "updateTime": "2025-09-05T12:31:21.708Z",
+        "applicationCategories": [],
+        "customAttributes": {
+            "versionMin": "19",
+            "doRespectRgaa": false,
+            "isFromFrenchPublicService": false,
+            "isPresentInSupportContract": false
+        },
+        "userAndReferentCountByOrganization": {
+            "DINUM": {
+                "userCount": 1,
+                "referentCount": 0
+            },
+            "CEA": {
+                "userCount": 1,
+                "referentCount": 0
+            }
+        },
+        "authors": [
+            {
+                "url": "https://www.wikidata.org/wiki/Q531341",
+                "name": "Igor Pavlov",
+                "@type": "Person"
+            }
+        ],
+        "url": "https://7-zip.org/",
+        "codeRepositoryUrl": "https://github.com/ip7z/7zip",
+        "license": "LGPL-2.0-only",
+        "externalId": "Q215051",
+        "sourceSlug": "wikidata",
+        "operatingSystems": {
+            "windows": true
+        },
+        "runtimePlatforms": ["desktop"],
+        "similarSoftwares": [
+            {
+                "externalId": "Q688317",
+                "sourceSlug": "wikidata",
+                "name": "WinZip",
+                "description": {
+                    "en": "file compression software",
+                    "fr": "logiciel informatique"
+                },
+                "isLibreSoftware": false,
+                "isInCatalogi": false
+            }
+        ],
+        "keywords": ["compression", "décompression"],
+        "programmingLanguages": ["C++"],
+        "providers": [
+            {
+                "url": "",
+                "name": "compte à supprimer 493",
+                "@type": "Organization"
+            }
+        ],
+        "referencePublications": [],
+        "identifiers": [
+            {
+                "url": "https://framalibre.org/notices/7-zip",
+                "name": "ID on FramaLibre",
+                "@type": "PropertyValue",
+                "value": "7-zip",
+                "subjectOf": {
+                    "url": "https://framalibre.org/",
+                    "name": "FramaLibre Official instance",
+                    "@type": "Website",
+                    "additionalType": "FramaLibre"
+                },
+                "additionalType": "Software"
+            }
+        ],
+        "repoMetadata": {},
+        "isLibreSoftware": false
+    },
+    {
+        "id": 606,
+        "name": "Anaconda",
+        "description": {
+            "fr": "distribution et gestionnaire de paquets de Python"
+        },
+        "image": "https://www.anaconda.com/wp-content/uploads/2024/11/2020_Anaconda_Logo_RGB_Corporate.png",
+        "latestVersion": {
+            "version": "2025.12-2",
+            "releaseDate": "2026-01-13T00:00:00.000Z"
+        },
+        "addedTime": "2025-08-19T13:34:28.432Z",
+        "updateTime": "2025-08-19T13:39:05.379Z",
+        "dereferencing": {
+            "reason": "Plateforme gratuite mais code source indisponible",
+            "time": "2025-09-04T09:50:48.708Z",
+            "lastRecommendedVersion": "43.35"
+        },
+        "applicationCategories": [],
+        "customAttributes": {
+            "versionMin": "43.35",
+            "doRespectRgaa": null,
+            "isFromFrenchPublicService": false,
+            "isPresentInSupportContract": false
+        },
+        "userAndReferentCountByOrganization": {
+            "MI": {
+                "userCount": 1,
+                "referentCount": 0
+            }
+        },
+        "authors": [],
+        "url": "https://anaconda.com/",
+        "license": "GNU",
+        "externalId": "Q18209310",
+        "sourceSlug": "wikidata",
+        "operatingSystems": {
+            "mac": true,
+            "linux": true,
+            "windows": true
+        },
+        "runtimePlatforms": ["desktop"],
+        "similarSoftwares": [],
+        "keywords": ["python", "distribution"],
+        "programmingLanguages": ["Python"],
+        "providers": [],
+        "referencePublications": [],
+        "identifiers": [
+            {
+                "url": "https://www.wikidata.org/wiki/Q18209310",
+                "name": "ID on Wikidata",
+                "@type": "PropertyValue",
+                "value": "Q18209310",
+                "subjectOf": {
+                    "url": "https://www.wikidata.org/",
+                    "name": "Wikidata",
+                    "@type": "Website",
+                    "additionalType": "wikidata"
+                },
+                "additionalType": "Software"
+            }
+        ],
+        "repoMetadata": {},
+        "isLibreSoftware": false
+    },
+    {
+        "id": 540,
+        "name": "Hardensysvol",
+        "description": {
+            "fr": "Outil d’audit de sécurité des GPO dans SysVol."
+        },
+        "image": "https://www.wikidata.org/wiki/Q131897282",
+        "latestVersion": {
+            "version": "2.0.2",
+            "releaseDate": "2025-06-30T00:00:00.000Z"
+        },
+        "addedTime": "2025-01-05T19:47:18.495Z",
+        "updateTime": "2026-06-03T11:21:19.202Z",
+        "applicationCategories": [],
+        "customAttributes": {
+            "versionMin": "v1.7.4",
+            "doRespectRgaa": null,
+            "isFromFrenchPublicService": false,
+            "isPresentInSupportContract": false
+        },
+        "userAndReferentCountByOrganization": {
+            "Université Grenoble Alpes": {
+                "userCount": 1,
+                "referentCount": 0
+            },
+            "Université de Pau et des Pays de l'Adour": {
+                "userCount": 1,
+                "referentCount": 0
+            }
+        },
+        "authors": [
+            {
+                "url": "https://www.wikidata.org/wiki/Q135191053",
+                "name": "Mehdi Dakhama",
+                "@type": "Person"
+            },
+            {
+                "url": "https://www.wikidata.org/wiki/Q135409811",
+                "name": "Harden community",
+                "@type": "Organization"
+            },
+            {
+                "id": "Q131623365",
+                "url": "https://www.wikidata.org/wiki/Q131623365",
+                "name": "Dakhama Mehdi"
+            }
+        ],
+        "url": "https://hardenad.net/",
+        "codeRepositoryUrl": "https://github.com/dakhama-mehdi/Harden-Sysvol",
+        "softwareHelp": "https://www.experts-exchange.com/articles/39474/Audit-and-identify-vulnerabilities-in-GPOs-SYSVOL.html",
+        "license": "AGPLv3",
+        "externalId": "Q131897282",
+        "sourceSlug": "wikidata",
+        "operatingSystems": {},
+        "runtimePlatforms": [],
+        "similarSoftwares": [
+            {
+                "externalId": "Q98805769",
+                "sourceSlug": "wikidata",
+                "name": "Purple Knights",
+                "description": {
+                    "en": "Wikimedia disambiguation page",
+                    "fr": "page d'homonymie de Wikimedia"
+                },
+                "isLibreSoftware": false,
+                "isInCatalogi": false
+            }
+        ],
+        "keywords": [
+            "GPO",
+            "AD",
+            {
+                "id": "Q3008145",
+                "numeric-id": 3008145,
+                "entity-type": "item"
+            }
+        ],
+        "programmingLanguages": ["PowerShell script"],
+        "providers": [],
+        "referencePublications": [],
+        "identifiers": [
+            {
+                "url": "https://www.wikidata.org/wiki/Q131897282",
+                "name": "ID on Wikidata",
+                "@type": "PropertyValue",
+                "value": "Q131897282",
+                "subjectOf": {
+                    "url": "https://www.wikidata.org/",
+                    "name": "Wikidata",
+                    "@type": "Website",
+                    "additionalType": "wikidata"
+                },
+                "additionalType": "Software"
+            }
+        ],
+        "repoMetadata": {},
+        "isLibreSoftware": false
+    }
+]
